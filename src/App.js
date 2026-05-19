@@ -5,6 +5,7 @@ import ProductList from './components/ProductList';
 import React,{useState} from 'react';
 import Footer from './components/Footer';
 import AddItem from './components/AddItem.js';
+import Toggle from './components/Toggle.js'
 import iphoneImg from './assets/iphone.png';
 import phoneImg from './assets/phone.png';
 import bluetoothImg from './assets/bluetooth.png';
@@ -115,7 +116,7 @@ function App() {
   return (
    <>
 
-    <Navbar/>
+    <Navbar/>  <Toggle />
     <main className = 'container mt-5'>
     <ProductList productList = {productListData} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} removeItem= {removeItem}/>
     </main>
