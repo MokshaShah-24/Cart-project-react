@@ -1,20 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/Navbar';
-import ProductList from './components/ProductList';
-import React,{useState} from 'react';
-import Footer from './components/Footer';
-import AddItem from './components/AddItem.js';
-import Toggle from './components/Toggle.js'
-import iphoneImg from './assets/iphone.png';
-import phoneImg from './assets/phone.png';
-import bluetoothImg from './assets/bluetooth.png';
-import speakerImg from './assets/speaker.png';
-import laptopImg from './assets/laptop.png';
+import logo from "./logo.svg";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import ProductList from "./components/ProductList";
+import React, { useState } from "react";
+import Footer from "./components/Footer";
+import AddItem from "./components/AddItem.js";
+import Toggle from "./components/Toggle.js";
+import iphoneImg from "./assets/iphone.png";
+import phoneImg from "./assets/phone.png";
+import bluetoothImg from "./assets/bluetooth.png";
+import speakerImg from "./assets/speaker.png";
+import laptopImg from "./assets/laptop.png";
 
 function App() {
-  const productList = 
-  [
+  const productList = [
     {
       img: iphoneImg,
       price: 99999,
@@ -48,62 +47,58 @@ function App() {
       price: 49999,
       name: "Dell Laptop",
       quantity: 0,
-    }
-  ]
+    },
+  ];
 
   let [productListData, setProductList] = useState(productList);
-  let[totalAmount, setTotalAmount] = useState(0);
+  let [totalAmount, setTotalAmount] = useState(0);
 
- const incrementQuantity = (index) => {
-  let newProductList = [...productListData];
+  const incrementQuantity = (index) => {
+    let newProductList = [...productListData];
 
-  newProductList[index].quantity++;
+    newProductList[index].quantity++;
 
-  let newTotalAmount =
-    totalAmount + newProductList[index].price;
+    let newTotalAmount = totalAmount + newProductList[index].price;
 
-  setTotalAmount(newTotalAmount);
-  setProductList(newProductList);
-};
+    setTotalAmount(newTotalAmount);
+    setProductList(newProductList);
+  };
 
   const decrementQuantity = (index) => {
-  let newProductList = [...productListData];
-  let newTotalAmount = totalAmount;
+    let newProductList = [...productListData];
+    let newTotalAmount = totalAmount;
 
-  if (newProductList[index].quantity > 0) {
-    newProductList[index].quantity--;
+    if (newProductList[index].quantity > 0) {
+      newProductList[index].quantity--;
 
-    newTotalAmount =
-      newTotalAmount - newProductList[index].price;
-  }
+      newTotalAmount = newTotalAmount - newProductList[index].price;
+    }
 
-  setTotalAmount(newTotalAmount);
-  setProductList(newProductList);
-};
+    setTotalAmount(newTotalAmount);
+    setProductList(newProductList);
+  };
 
-  const resetQuantity = () =>
-  {
+  const resetQuantity = () => {
     let newProductList = [...productList];
-    newProductList.map((products) =>{
+    newProductList.map((products) => {
       products.quantity = 0;
     });
     setProductList(newProductList);
     setTotalAmount(0);
   };
 
-    const removeItem = (index) =>{
+  const removeItem = (index) => {
     let newProductList = [...productList];
     let newTotalAmount = totalAmount;
-   newTotalAmount =
-  totalAmount -
-  (newProductList[index].quantity *
-   newProductList[index].price);
-    newProductList.splice(index,1);
+    newTotalAmount =
+      totalAmount -
+      newProductList[index].quantity * newProductList[index].price;
+    newProductList.splice(index, 1);
     setTotalAmount(newTotalAmount);
     setProductList(newProductList);
   };
 
-   const addItem = (index) =>{
+  const addItem = (index) => {
     let newProductList = [...productList];
     newProductList.push({
       price: price,
@@ -114,15 +109,18 @@ function App() {
   };
 
   return (
-   <>
-
-    <Navbar/>  <Toggle />
-    <main className = 'container mt-5'>
-    <ProductList productList = {productListData} incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} removeItem= {removeItem}/>
-    </main>
-    <Footer totalAmount={totalAmount} resetQuantity={resetQuantity}/>
-
-   </>
+    <>
+      <Navbar /> <Toggle />
+      <main className="container mt-5">
+        <ProductList
+          productList={productListData}
+          incrementQuantity={incrementQuantity}
+          decrementQuantity={decrementQuantity}
+          removeItem={removeItem}
+        />
+      </main>
+      <Footer totalAmount={totalAmount} resetQuantity={resetQuantity} />
+    </>
   );
 }
 
